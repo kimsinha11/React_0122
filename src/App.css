@@ -1,0 +1,94 @@
+/* App.css */
+
+/* 전체 레이아웃 설정 */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header 스타일 설정 */
+.Header {
+  text-align: center;
+  background-color: #333;
+  width: 100%;
+  color: white;
+  padding: 1rem;
+}
+
+/* Footer 스타일 설정 */
+.Footer {
+  text-align: center;
+  background-color: #333;
+  width: 100%;
+  color: white;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+}
+
+/* 메뉴바 스타일 설정 */
+.Menu {
+  background-color: #444;
+  color: white;
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: left 0.3s ease;
+  z-index: 2; /* Content보다 위에 표시되도록 설정 */
+}
+
+.Menu.open {
+  left: 0;
+}
+
+.Menu ul {
+  list-style: none;
+  padding-top: 70%;
+}
+
+.Menu li {
+  margin: 10px 0;
+}
+
+.Menu li a {
+  color: white;
+  text-decoration: none;
+}
+
+.Menu li a:hover {
+  text-decoration: underline;
+}
+
+/* Content 영역과의 간격 설정 */
+.Content {
+  margin-left: 200px; /* 메뉴바가 열릴 때의 간격 설정 */
+}
+
+/* 로그인 폼 스타일 설정 */
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 300px;
+  padding-right: 180px;
+}
+
+.LoginForm input {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.LoginForm button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* 로그인 성공 메시지 스타일 설정 */
+.LoginSuccessMessage {
+  text-align: center;
+  padding-top: 300px;
+  padding-right: 180px;
+}
