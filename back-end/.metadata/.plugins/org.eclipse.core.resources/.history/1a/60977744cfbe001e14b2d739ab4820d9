@@ -1,0 +1,6 @@
+package kr.co.wizian.react.controller;
+
+@RestController
+public class MainController {
+
+}

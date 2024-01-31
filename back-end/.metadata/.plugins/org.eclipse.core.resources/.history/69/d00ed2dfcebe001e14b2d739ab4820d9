@@ -1,0 +1,11 @@
+package kr.co.wizian.react.service.impl;
+
+import kr.co.wizian.react.dto.LoginReplyDto;
+import kr.co.wizian.react.dto.LoginRequestDto;
+import kr.co.wizian.react.service.MainService;
+
+public class MainServiceImpl implements MainService {
+
+	LoginReplyDto doLogin(LoginRequestDto request);
+	
+}

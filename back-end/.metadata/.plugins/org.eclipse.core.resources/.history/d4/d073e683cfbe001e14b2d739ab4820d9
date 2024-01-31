@@ -1,0 +1,5 @@
+package kr.co.wizian.react.mapper;
+
+public interface MainMapper {
+
+}
