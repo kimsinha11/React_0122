@@ -1,19 +1,20 @@
+// Login.js
+
 import React, { useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom'; // Link 컴포넌트와 useNavigate 훅 가져오기
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // useNavigate 훅을 사용하여 페이지 이동 함수 가져오기
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    // 로그인 처리
     if (!username || !password) {
       alert('아이디와 비밀번호를 입력해주세요.');
     } else {
-      onLogin(username, password); // 사용자명과 비밀번호를 부모 컴포넌트로 전달하여 로그인 처리
-      navigate('/'); // 홈으로 이동
+      onLogin(); // onLogin 프롭스 호출
+      navigate('/home');
     }
   };
 
@@ -44,7 +45,7 @@ function Login({ onLogin }) {
           <br />
           <button onClick={handleLogin}>로그인</button>
           <br />
-          <p>계정이 없으신가요? <Link to="/signup">회원가입</Link></p> {/* 회원가입 링크 추가 */}
+          <p>계정이 없으신가요? <Link to="/signup">회원가입</Link></p>
         </Form>
       </Container>
     </div>
