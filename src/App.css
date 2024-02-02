@@ -93,39 +93,28 @@
   padding-right: 180px;
 }
 
-.LoginButton,
-.LogoutButton {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.LoginButton:hover,
-.LogoutButton:hover {
-  background-color: #0056b3;
-}
 
 
 button {
-  background-color: #4CAF50; /* Green background */
+  background-color: #f7e9f1; /* Green background */
   border: none; /* Remove border */
-  color: white; /* White text */
-  padding: 15px 32px; /* Padding */
+  color: rgb(3, 3, 3); /* White text */
+  padding: 10px 15px; /* Padding */
   text-align: center; /* Center text */
   text-decoration: none; /* Remove underline */
   display: inline-block; /* Display as inline-block */
-  font-size: 16px; /* Font size */
+  font-size: 13px; /* Font size */
   margin: 4px 2px; /* Margin */
   transition-duration: 0.4s; /* Transition duration */
   cursor: pointer; /* Pointer cursor */
   border-radius: 8px; /* Border radius */
+  font-weight: bold; /* 글자를 */
+
 }
 
 button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #e969b8; /* Darker green on hover */
 }
+
+
+

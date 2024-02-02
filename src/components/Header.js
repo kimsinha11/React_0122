@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../App.css';
-function Header({ title, isLoggedIn }) {
+
+function Header({ title, isLoggedIn, onLogout }) {
   const navigate = useNavigate();
 
   const handleHomeClick = () => {
@@ -14,6 +14,11 @@ function Header({ title, isLoggedIn }) {
 
   const handleContactClick = () => {
     navigate('/contact');
+  };
+
+  const handleLogout = () => {
+    onLogout(); // 로그아웃 수행
+    navigate('/login'); // 로그아웃 후 '/'로 이동
   };
 
   return (
@@ -30,6 +35,9 @@ function Header({ title, isLoggedIn }) {
             </li>
             <li>
               <button onClick={handleContactClick}>연락</button>
+            </li>
+            <li>
+              <button className="logout-button" onClick={handleLogout}>로그아웃</button>
             </li>
           </ul>
         </nav>

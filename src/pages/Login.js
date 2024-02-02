@@ -42,7 +42,14 @@ function Login({ onLogin }) {
             />
           </Form.Group>
           <br />
-          <button type="button" onClick={handleLogin}>로그인</button>
+          <button type="button" onClick={handleLogin} style={{
+    border: '1px solid #007bff',
+    backgroundColor: '#fff',
+    color: '#000',
+    padding: '8px 16px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s, color 0.3s'
+  }}>로그인</button>
           <br />
           <p>계정이 없으신가요? <Link to="/signup">회원가입</Link></p>
         </Form>

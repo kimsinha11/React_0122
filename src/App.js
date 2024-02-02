@@ -6,7 +6,6 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import './App.css';
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -19,20 +18,18 @@ function App() {
   };
 
   return (
-  
-      <div className="App">
-        <Header title="게시판" isLoggedIn={isLoggedIn} />
+    <div className="App">
+      
+      <Header title="게시판" isLoggedIn={isLoggedIn} onLogout={handleLogout} />
         <Routes>
-        <Route path="/" element={<Login onLogin={handleLogin} />} />
-            {isLoggedIn ? (
-        <Route path="/home" element={<Home isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />
-          ) : (
-        <Route path="*" element={<Navigate to="/" />} />
-         )}
+          <Route path="/" element={<Login onLogin={handleLogin} />} />
+          <Route path="/home" element={<Home isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />
+          {/* Redirect to login page if not logged in */}
+          {!isLoggedIn && <Route path="*" element={<Navigate to="/" />} />}
         </Routes>
         <Footer content="위지언" />
-      </div>
-   
+      
+    </div>
   );
 }
 
