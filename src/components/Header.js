@@ -18,7 +18,7 @@ function Header({ title, isLoggedIn, onLogout }) {
 
   const handleLogout = () => {
     onLogout(); // 로그아웃 수행
-    navigate('/login'); // 로그아웃 후 '/'로 이동
+    navigate('/'); // 로그아웃 후 '/'로 이동
   };
 
   return (
