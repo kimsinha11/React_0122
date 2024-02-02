@@ -109,3 +109,23 @@
 .LogoutButton:hover {
   background-color: #0056b3;
 }
+
+
+button {
+  background-color: #4CAF50; /* Green background */
+  border: none; /* Remove border */
+  color: white; /* White text */
+  padding: 15px 32px; /* Padding */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Display as inline-block */
+  font-size: 16px; /* Font size */
+  margin: 4px 2px; /* Margin */
+  transition-duration: 0.4s; /* Transition duration */
+  cursor: pointer; /* Pointer cursor */
+  border-radius: 8px; /* Border radius */
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}

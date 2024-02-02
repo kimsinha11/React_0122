@@ -1,8 +1,7 @@
-// Login.js
-
 import React, { useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import '../App.css';
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');
@@ -14,7 +13,7 @@ function Login({ onLogin }) {
       alert('아이디와 비밀번호를 입력해주세요.');
     } else {
       onLogin(); // onLogin 프롭스 호출
-      navigate('/home');
+      navigate('/home'); // 로그인 성공 시 '/home'으로 이동
     }
   };
 
@@ -43,7 +42,7 @@ function Login({ onLogin }) {
             />
           </Form.Group>
           <br />
-          <button onClick={handleLogin}>로그인</button>
+          <button type="button" onClick={handleLogin}>로그인</button>
           <br />
           <p>계정이 없으신가요? <Link to="/signup">회원가입</Link></p>
         </Form>
