@@ -8,12 +8,12 @@ function Header({ title, isLoggedIn, onLogout }) {
     navigate('/home');
   };
 
-  const handleAboutClick = () => {
-    navigate('/about');
+  const handleWriteClick = () => {
+    navigate('/write');
   };
 
-  const handleContactClick = () => {
-    navigate('/contact');
+  const handlePostListClick = () => {
+    navigate('/postlist');
   };
 
   const handleLogout = () => {
@@ -31,10 +31,10 @@ function Header({ title, isLoggedIn, onLogout }) {
               <button onClick={handleHomeClick}>홈</button>
             </li>
             <li>
-              <button onClick={handleAboutClick}>소개</button>
+              <button onClick={handleWriteClick}>글쓰기</button>
             </li>
             <li>
-              <button onClick={handleContactClick}>연락</button>
+              <button onClick={handlePostListClick}>게시판</button>
             </li>
             <li>
               <button className="logout-button" onClick={handleLogout}>로그아웃</button>

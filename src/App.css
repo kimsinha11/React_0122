@@ -6,6 +6,12 @@
   flex-direction: column;
   min-height: 100vh;
 }
+.Write {
+  max-width: 600px;
+  margin: auto; /* 화면 가운데 정렬을 위한 margin 설정 */
+  padding: 150px;
+  text-align: center; /* 내용을 가운데 정렬 */
+}
 
 /* Header 스타일 설정 */
 .Header {
@@ -114,6 +120,34 @@ button {
 
 button:hover {
   background-color: #e969b8; /* Darker green on hover */
+}
+
+
+
+.Write h2 {
+  margin-bottom: 20px;
+}
+
+.Write form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.Write form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.Write form button:hover {
+  background-color: #0056b3;
 }
 
 

@@ -1,0 +1,28 @@
+.PostList {
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    margin-top: 50px;
+  }
+  
+  .PostList table {
+    width: 60%;
+    border-collapse: collapse;
+  }
+  
+  .PostList th,
+  .PostList td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .PostList th {
+    background-color: #f2f2f2;
+  }
+  
+  .PostList h1 {
+    margin-right: 20px;
+  }
+  
+  .Id {
+    text-align: center;
+  }

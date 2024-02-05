@@ -20,22 +20,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MainController {
 
-	@Autowired
-	MainService service;
+    @Autowired
+    MainService service;
 
-	@ResponseBody
-	@RequestMapping(value="/doLogin", method=RequestMethod.POST)
-	LoginReplyDto doLogin(@RequestBody LoginRequestDto requestDto) {
-		
-		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-		String ipAddr = req.getHeader("X-FORWARDED-FOR");
-		if (ipAddr == null) {
-			ipAddr = req.getRemoteAddr();
-		}
-		
-		log.info("doLogin() - {}", ipAddr);
+    @ResponseBody
+    @RequestMapping(value="/api/login", method=RequestMethod.POST)
+    LoginReplyDto loginUser(@RequestBody LoginRequestDto requestDto) {
+        HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+        String ipAddr = req.getHeader("X-FORWARDED-FOR");
+        if (ipAddr == null) {
+            ipAddr = req.getRemoteAddr();
+        }
 
-		// 처리 요청
-		return service.doLogin(requestDto);
-	}
+        log.info("doLogin() - {}", ipAddr);
+
+        // 처리 요청
+        return service.doLogin(requestDto);
+    }
 }
