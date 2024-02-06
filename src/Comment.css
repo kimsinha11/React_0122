@@ -1,0 +1,20 @@
+/* Comment.css */
+
+.Comment {
+    margin-top: 20px;
+  }
+  
+  .Comment h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .Comment ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .Comment li {
+    margin-bottom: 5px;
+  }
+  

@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import PostList from './pages/PostList.js';
 import Write from './pages/Write';
 import Detail from './pages/Detail';
+import Comment from './pages/Comment.js';
 import './App.css';
 
 
@@ -31,7 +32,8 @@ function App() {
           <Route path="/home" element={<Home isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />
           <Route path="/write" element={<Write isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />
           <Route path="/postlist" element={<PostList isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />
-          <Route path="/detail" element={<Detail isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />
+          <Route path="/detail/:id" element={<Detail isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />
+          <Route path="/comment" element={<Comment isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />
           {/* Redirect to login page if not logged in */}
           {!isLoggedIn && <Route path="*" element={<Navigate to="/" />} />}
         </Routes>
