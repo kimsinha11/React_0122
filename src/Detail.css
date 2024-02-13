@@ -7,6 +7,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-left: 9%;
+    flex-direction: column;
   }
   
   .Detail h2 {
@@ -19,5 +20,8 @@
     font-size: 16px;
     margin-bottom: 5px;
   }
-  
- 
+
+  .Comment {
+    border: 2px solid #0a0505;
+  }
+

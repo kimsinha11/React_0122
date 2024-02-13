@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../Write.css';
 
 function Write({ isLoggedIn }) {
   const [content, setContent] = useState('');
@@ -23,7 +24,7 @@ function Write({ isLoggedIn }) {
 
   return (
     <div className="Write">
-      <h2>글쓰기 페이지입니다.</h2>
+      <h2>게시글을 작성해주세요.</h2>
       {isLoggedIn ? (
         <form onSubmit={handleSubmit}>
           <textarea

@@ -1,0 +1,31 @@
+.Write {
+    max-width: 600px;
+    margin: auto; /* 화면 가운데 정렬을 위한 margin 설정 */
+    padding: 150px;
+    text-align: center; /* 내용을 가운데 정렬 */
+  }
+  .Write h2 {
+    margin-bottom: 20px;
+  }
+  
+  .Write form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .Write form button {
+    width: 150px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .Write form button:hover {
+    background-color: #0056b3;
+  }

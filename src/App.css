@@ -6,12 +6,7 @@
   flex-direction: column;
   min-height: 100vh;
 }
-.Write {
-  max-width: 600px;
-  margin: auto; /* 화면 가운데 정렬을 위한 margin 설정 */
-  padding: 150px;
-  text-align: center; /* 내용을 가운데 정렬 */
-}
+
 
 /* Header 스타일 설정 */
 .Header {
@@ -43,7 +38,7 @@
   top: 0;
   left: 0;
   transition: left 0.3s ease;
-  z-index: 2; /* Content보다 위에 표시되도록 설정 */
+  z-index: 2; 
 }
 
 .Menu.open {
@@ -105,11 +100,12 @@ button {
   background-color: #f7e9f1; /* Green background */
   border: none; /* Remove border */
   color: rgb(3, 3, 3); /* White text */
+  width: 100px;
   padding: 10px 15px; /* Padding */
   text-align: center; /* Center text */
   text-decoration: none; /* Remove underline */
   display: inline-block; /* Display as inline-block */
-  font-size: 13px; /* Font size */
+  font-size: 15px; /* Font size */
   margin: 4px 2px; /* Margin */
   transition-duration: 0.4s; /* Transition duration */
   cursor: pointer; /* Pointer cursor */
@@ -122,33 +118,44 @@ button:hover {
   background-color: #e969b8; /* Darker green on hover */
 }
 
-
-
-.Write h2 {
-  margin-bottom: 20px;
-}
-
-.Write form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.Write form button {
+.logout-button {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #ee8eaa;
+  color: #0c0000;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.Write form button:hover {
-  background-color: #0056b3;
+.logout-button:hover {
+  background-color: #f1106e;
+  color: #fffefe;
+}
+
+.login-button {
+  padding: 10px 20px;
+  background-color: #ee8eaa;
+  color: #0c0000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #f1106e;
+  color: #fffefe;
 }
 
 
+.Home {
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+}
 
+.Home h1 {
+  border: 1px solid #ccc;
+  padding: 20px; /* 원하는 패딩 값 설정 */
+}

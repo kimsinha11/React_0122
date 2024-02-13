@@ -5,7 +5,7 @@
   }
   
   .PostList table {
-    width: 60%;
+    width: 70%;
     border-collapse: collapse;
   }
   
@@ -14,7 +14,38 @@
     border: 1px solid #ddd;
     padding: 8px;
   }
+  /* 제목과 내용의 너비를 조정 */
+  .post_title {
+    width: 20%;
+  }
+
+  .post_cont {
+    width: 25%;
+  }
+
+  .Center button {
+    background-color: #f7e9f1; /* Green background */
+    border: none; /* Remove border */
+    color: rgb(3, 3, 3); /* White text */
+    width: 80px;
+    padding: 10px 15px; /* Padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Display as inline-block */
+    font-size: 15px; /* Font size */
+    margin: 4px 2px; /* Margin */
+    transition-duration: 0.4s; /* Transition duration */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 8px; /* Border radius */
+    font-weight: bold; /* 글자를 */
   
+  }
+  
+  button:hover {
+    background-color: #e969b8; /* Darker green on hover */
+  }
+  
+ 
   .PostList th {
     background-color: #f2f2f2;
   }
@@ -23,6 +54,6 @@
     margin-right: 20px;
   }
   
-  .Id {
+  .Center {
     text-align: center;
   }

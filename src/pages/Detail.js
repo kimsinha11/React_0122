@@ -1,11 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../Detail.css'; // 수정: 파일 경로를 정확히 지정해주세요.
 import Comment from './Comment'; // Comment 컴포넌트를 import .
 
 function Detail() {
   // useParams 훅을 사용하여 URL에서 게시물 ID를 추출합니다.
   const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  const goToPostList = () => {
+    navigate('/postlist');
+  };
 
   // 임시로 만든 예시 데이터를 가져옵니다.
   const posts = [
@@ -33,9 +40,13 @@ function Detail() {
       <p>내용: {selectedPost.content}</p>
       <p>작성자: {selectedPost.writer}</p>
       <p>작성날짜: {selectedPost.date}</p></div>
-       {/* Comment 컴포넌트를 호출하여 댓글을 표시하고, postId를 전달합니다. */}
+       
+      <div className="Comment">
        <Comment postId={selectedPost.id} />
-      {/* 이곳에 해당 게시물의 상세 내용을 표시하는 코드를 추가하세요 */}
+       </div>
+       <div className="ButtonContainer">
+        <button onClick={goToPostList}>뒤로가기</button>
+      </div>
     </div>
   );
 }
