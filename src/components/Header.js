@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function Header({ title, isLoggedIn, onLogout }) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleHomeClick = () => {
     navigate('/home');
@@ -21,9 +23,16 @@ function Header({ title, isLoggedIn, onLogout }) {
     navigate('/'); // 로그아웃 후 '/'로 이동
   };
 
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
   return (
     <header className="Header">
       <h1>{title}</h1>
+      {pathname !== '/' && !isLoggedIn && (
+        <button className="login-button" onClick={handleLoginClick}>로그인</button>
+      )}
       {isLoggedIn && (
         <nav className="Menu">
           <ul>

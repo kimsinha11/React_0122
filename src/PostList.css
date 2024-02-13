@@ -1,8 +1,10 @@
 .PostList {
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    margin-top: 50px;
-  }
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  flex-direction: column; /* 요소들을 세로로 배치 */
+  align-items: center; /* 수직 가운데 정렬 */
+  margin-top: 50px;
+}
   
   .PostList table {
     width: 70%;
@@ -56,4 +58,14 @@
   
   .Center {
     text-align: center;
+  }
+
+  .Pagination {
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+    margin-top: 20px; /* 페이지네이션과 게시글 테이블 사이의 간격 조정 */
+  }
+  
+  .Pagination button {
+    margin: 0 5px; /* 페이지네이션 버튼 간의 간격 조정 */
   }

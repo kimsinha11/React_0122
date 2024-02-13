@@ -16,9 +16,15 @@ function Detail() {
 
   // 임시로 만든 예시 데이터를 가져옵니다.
   const posts = [
-    { id: 1, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'' },
-    { id: 2, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'' },
-    { id: 3, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'' },
+    { id: 1, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 2, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 3, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 4, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 5, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 6, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 71, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 8, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 9, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 10, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 11, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 12, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 13, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 }
     // 필요한 만큼 데이터 추가
   ];
 
@@ -33,20 +39,20 @@ function Detail() {
   return (
     
     <div className="Detail"> {/* 수정: 클래스를 적용할 요소에 className 속성을 추가합니다. */}
+    <h2>게시물 상세 페이지</h2>
         <div className="Main">
-        <h2>게시물 상세 페이지</h2>
-      <p>ID: {selectedPost.id}</p>
-      <p>제목: {selectedPost.title}</p>
-      <p>내용: {selectedPost.content}</p>
-      <p>작성자: {selectedPost.writer}</p>
-      <p>작성날짜: {selectedPost.date}</p></div>
-       
-      <div className="Comment">
-       <Comment postId={selectedPost.id} />
-       </div>
-       <div className="ButtonContainer">
-        <button onClick={goToPostList}>뒤로가기</button>
-      </div>
+          <p>ID: {selectedPost.id}</p>
+          <p>제목: {selectedPost.title}</p>
+          <p>내용: {selectedPost.content}</p>
+          <p>작성자: {selectedPost.writer}</p>
+          <p>작성날짜: {selectedPost.date}</p>
+        </div>
+        <div className="ButtonContainer">
+          <button onClick={goToPostList}>뒤로가기</button>
+        </div>
+        <div className="Comment">
+          <Comment postId={selectedPost.id} />
+        </div>
     </div>
   );
 }

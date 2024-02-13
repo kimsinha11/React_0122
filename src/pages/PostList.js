@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../PostList.css';
 
 function PostList({ isLoggedIn }) {
+  const navigate = useNavigate();
   // 임시로 만든 데이터
   const [posts, setPosts] = useState([
     { id: 1, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
     { id: 2, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
-    { id: 3, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 3, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 4, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 5, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 6, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 71, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 8, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 9, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 10, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 11, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 12, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 13, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 }
     // 필요한 만큼 데이터 추가
   ]);
+  
+  const itemsPerPage = 10; // 한 페이지에 표시할 게시물 수
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
 
   const getCurrentTime = () => {
     const now = new Date();
@@ -70,6 +80,39 @@ function PostList({ isLoggedIn }) {
     }));
   };
 
+  useEffect(() => {
+    // URL에서 페이지 번호 가져오기
+    const searchParams = new URLSearchParams(window.location.search);
+    const pageParam = searchParams.get('page');
+    const parsedPage = parseInt(pageParam);
+
+     // 페이지 번호가 유효한지 확인하고, 현재 페이지로 설정
+     if (!isNaN(parsedPage) && parsedPage >= 1 && parsedPage <= Math.ceil(posts.length / itemsPerPage)) {
+      setCurrentPage(parsedPage);
+    } else {
+      // 잘못된 페이지 번호면 첫 페이지로 이동
+      navigate(`?page=1`);
+    }
+  }, [posts.length, itemsPerPage, navigate]);
+
+  // 페이지 변경 함수
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    navigate(`?page=${pageNumber}`);
+  };
+
+
+  // 현재 페이지에 해당하는 게시물 가져오기
+  const indexOfLastPost = currentPage * itemsPerPage;
+  const indexOfFirstPost = indexOfLastPost - itemsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // 페이지 번호 목록 생성
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(posts.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div className="PostList">
       <div><h1>게시글</h1></div> 
@@ -86,12 +129,12 @@ function PostList({ isLoggedIn }) {
           </tr>
         </thead>
         <tbody>
-          {/* 임시 데이터를 사용하여 테이블 행을 생성 */}
-          {posts.map(post => (
+          {/* 현재 페이지에 해당하는 게시물 표시 */}
+          {currentPosts.map(post => (
             <tr key={post.id}>
               <td className="Center">{post.id}</td>
               <td><Link to={`/detail/${post.id}`}>{post.title}</Link></td>
-              <td>{post.content}</td>
+              <td><Link to={`/detail/${post.id}`}>{post.content}</Link></td>
               <td className="Center">{post.writer}</td>
               <td className="Center">{getCurrentTime()}</td>
               <td className="Center">
@@ -106,6 +149,14 @@ function PostList({ isLoggedIn }) {
           ))}
         </tbody>
       </table>
+      {/* 페이지 번호 목록 표시 */}
+      <div className="Pagination">
+        {pageNumbers.map(number => (
+          <button key={number} onClick={() => handlePageChange(number)}>
+            {number}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

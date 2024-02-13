@@ -1,9 +1,10 @@
 .Write {
-    max-width: 600px;
-    margin: auto; /* 화면 가운데 정렬을 위한 margin 설정 */
-    padding: 150px;
-    text-align: center; /* 내용을 가운데 정렬 */
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding-top: 250px;
   }
+
   .Write h2 {
     margin-bottom: 20px;
   }
@@ -22,6 +23,8 @@
     color: #fff;
     border: none;
     border-radius: 8px;
+    margin: 0 auto; /* 좌우 마진을 자동으로 설정하여 가운데 정렬 */
+    display: block; /* 블록 요소로 설정하여 너비를 가득 채우지 않게 함 */
     cursor: pointer;
     transition: background-color 0.3s;
   }
