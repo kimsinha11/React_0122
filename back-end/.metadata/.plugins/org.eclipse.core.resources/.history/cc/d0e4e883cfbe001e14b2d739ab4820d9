@@ -1,0 +1,5 @@
+package kr.co.wizian.react.dto;
+
+public class LoginReplyDto {
+
+}

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kt.localpay.openbanking.mapper.OpenbankingMapper">
+
+	<insert id="addAccessToken" parameterType="com.kt.localpay.openbanking.dto.AccessTokenDto">
+		INSERT INTO OPENBANKING_ACCESS_TOKEN (CLIENT_USE_CODE, INST_TIMESTAMP, ACCESS_TOKEN, TOKEN_STATUS, TOKEN_TYPE, SCOPE, EXPIRE_DATE)
+					VALUES				(#{clientUseCode}, now(), #{accessToken}, #{tokenStatus}, #{tokenType}, #{scope}, #{expireDate})
+	</insert>
+
+	<update id="expireOtherAccessToken" parameterType="String">
+		UPDATE	OPENBANKING_ACCESS_TOKEN
+		SET		TOKEN_STATUS='D'
+		WHERE	ACCESS_TOKEN != #{activeAccessToken}
+	</update>
+	
+	<select id="getAccessToken" resultType="com.kt.localpay.openbanking.dto.AccessTokenDto">
+		SELECT	CLIENT_USE_CODE as clientUseCode, ACCESS_TOKEN as accessToken
+		FROM	OPENBANKING_ACCESS_TOKEN
+		WHERE	TOKEN_STATUS = 'A'
+		LIMIT	1
+	</select>
+
+	<select id="getOpenbankingId" parameterType="String" resultType="String">
+		SELECT	OB_USER_ID
+		FROM  	OPENBANKING_USER_MAPPING
+		WHERE	SB_USER_ID = #{sbUserId} AND ID_STATUS='A'
+		LIMIT	1
+	</select>
+
+	<select id="getOpenbankingIdSeq" resultType="String">
+		SELECT LPAD(CAST(NEXTVAL('ob_id_seq') as VARCHAR(10)) , 10, '0')
+	</select>
+
+	<insert id="addOpenbankingId" parameterType="com.kt.localpay.openbanking.dto.AddObIdDto">
+		INSERT INTO OPENBANKING_USER_MAPPING (SB_USER_ID, INST_TIMESTAMP, OB_USER_ID, ID_STATUS)
+					VALUES				(#{sbId}, now(), #{obId}, 'A')
+	</insert>
+
+	<select id="getTxSeqNo" resultType="String">
+		SELECT LPAD(CAST(NEXTVAL('ob_tx_seq') as VARCHAR(10)) , 9, '0')
+	</select>
+
+	<insert id="addAccount" parameterType="com.kt.localpay.openbanking.dto.RegistAccountDto">
+		INSERT INTO openbanking_account_info (USER_ID, USER_NAME, INST_TIMESTAMP, API_TRAN_ID, API_TRAN_DTM,
+										 BANK_TRAN_ID, BANK_TRAN_DATE, BANK_CODE_STD, BANK_NAME, SAVINGS_BANK_NAME,
+										 USER_SEQ_NO, FINTECH_USE_NUM, PAYER_NUM,
+										 ACCOUNT_TYPE, TRANSFER_BANK_TRAN_ID, TRANSFER_BANK_TRAN_DATE, REGISTER_ACCOUNT_NUM, SCOPE,
+										 AGMT_DATA_TYPE, ACCOUNT_STATUS, RSP_CODE, RSP_MESSAGE, BANK_RSP_CODE, BANK_RSP_MESSAGE)
+					VALUES				(#{userId}, #{userName}, now(), #{apiTranId}, #{apiTranDtm},
+										 #{bankTranId}, #{bankTranDate}, #{bankCode}, #{bankName}, #{savingBankName},
+										 #{userSeqNo}, #{fintechUseNum}, #{payerNum},
+										 #{accountType}, #{tranBankTranId}, #{tranBankTranDate}, #{accountNum}, #{scope},
+					 					 #{agmtType}, #{accountStatus}, #{rspCode}, #{rspMessage}, #{bankRspCode}, #{bankRspMessage})
+	</insert>
+
+	<select id="checkAccountNumByBank" parameterType="com.kt.localpay.openbanking.dto.AccountCheckDto" resultType="int">
+		SELECT	count(*) FROM openbanking_account_info
+		WHERE	USER_ID 	   = #{userId}
+			AND	BANK_CODE_STD  = #{bankCode}
+			AND ACCOUNT_STATUS = 'A'
+	</select>
+	
+	<select id="getRecvAccountInfo" parameterType="String" resultType="com.kt.localpay.openbanking.dto.ReceiverAccountInfoDto">
+		SELECT	OWNER_NAME as ownerName, BANK_CODE as bankCode, ACCOUNT_NUM as accountNum,
+				RECV_CLIENT_NAME as recvClientName, RECV_CLIENT_BANK_CODE as recvClientBankCode, RECV_CLIENT_ACCOUNT_NUM as recvClientAccountNum
+		FROM	OPENBANKING_RECV_ACCOUNT_INFO
+		WHERE	SVC_ID = #{svcId}
+			AND ACCOUNT_STATUS = 'A'
+		LIMIT	1
+	</select>
+
+	<select id="getSendAccountInfo" parameterType="com.kt.localpay.openbanking.dto.SenderAccountInfoDto" resultType="com.kt.localpay.openbanking.dto.SenderAccountInfoDto">
+		SELECT	FINTECH_USE_NUM as fintechNo, USER_SEQ_NO as userSeqNo, REGISTER_ACCOUNT_NUM as accountNum, USER_NAME as userName
+		FROM	openbanking_account_info
+		WHERE	USER_ID					= #{userId}
+			AND	BANK_CODE_STD			= #{bankCode}
+			AND	ACCOUNT_STATUS			= 'A'
+		LIMIT	1
+	</select>
+
+	<select id="getFintechNo" parameterType="com.kt.localpay.openbanking.dto.QueryFintechNoDto" resultType="String">
+		SELECT	FINTECH_USE_NUM
+		FROM	openbanking_account_info
+		WHERE	USER_ID				= #{userId}
+			AND	BANK_CODE_STD		= #{bankCode}
+			AND ACCOUNT_STATUS = 'A'
+		LIMIT	1
+	</select>
+	
+	<update id="cancelAccount" parameterType="com.kt.localpay.openbanking.dto.CancelAccountDto">
+		UPDATE openbanking_account_info 
+		SET		ACCOUNT_STATUS = 'D',
+				UNREGIST_TIMESTAMP 		= NOW()
+		WHERE	USER_ID 				= #{userId}
+			AND	BANK_CODE_STD	 		= #{bankCode}
+			AND FINTECH_USE_NUM			= #{fintechNum}
+	</update>
+
+	<insert id="addTxData" parameterType="com.kt.localpay.openbanking.dto.AddTxDto">
+		INSERT INTO openbanking_transfer_tx (USER_ID, INST_TIMESTAMP, SB_OID, SB_TR_DT, SB_TR_TIME,
+											BANK_TRAN_ID, CNTR_ACCOUNT_TYPE, CNTR_ACCOUNT_NUM, DPS_PRINT_CONTENT,
+											FINTECH_USE_NUM, USER_SEQ_NO, WD_PRINT_CONTENT, TRAN_AMT, TRAN_DTIME,
+											REQ_CLIENT_NAME, REQ_CLIENT_BANK_CODE, REQ_CLIENT_ACCOUNT_NUM, REQ_CLIENT_NUM,
+											TRANSFER_PURPOSE, SUB_FRNC_NAME, SUB_FRNC_NUM, SUB_FRNC_BUSINESS_NUM,
+											RECV_CLIENT_NAME, RECV_CLIENT_BANK_CODE, RECV_CLIENT_ACCOUNT_NUM, TX_STATUS)
+					VALUES					(#{userId}, now(), #{sbOid}, #{sbTrDt}, #{sbTrTime},
+											#{bankTranId}, #{cntrAccountType}, #{cntrAccountNum}, #{dpsPrintContent},
+											#{fintechUseNum}, #{userSeqNo}, #{wdPrintContent}, #{tranAmtInt}, #{tranDtime},
+											#{reqClientName}, #{reqClientBankCode}, #{reqClientAccountNum}, #{reqClientNum},
+											#{transferPurpose}, #{subFrncName}, #{subFrnNum}, #{subFrncBusinessNum},
+											#{recvClientName}, #{recvClientBankCode}, #{recvClientAccountNum}, 'S')
+	</insert>
+
+	<update id="updateTxData" parameterType="com.kt.localpay.openbanking.dto.UpdateTxDto">
+		UPDATE openbanking_transfer_tx
+		SET		RESP_TIMESTAMP				= now(),
+				API_TRAN_ID					= #{apiTranId},
+				API_TRAN_DTM				= #{apiTranDtm},
+				RSP_CODE 					= #{rspCode},
+				RSP_MESSAGE 				= #{rspMessage},
+				DPS_BANK_CODE_STD 			= #{dpsBankCodeStd},
+				DPS_BANK_CODE_SUB 			= #{dpsBankCodeSub},
+				DPS_BANK_NAME 				= #{dpsBankName},
+				DPS_ACCOUNT_NUM_MASKED 		= #{dpsAccountNumMasked},
+				DPS_ACCOUNT_HOLDER_NAME 	= #{dpsAccountHolderName},
+				BANK_TRAN_DATE 				= #{bankTranDate},
+				BANK_CODE_TRAN 				= #{bankCodeTran},
+				BANK_RSP_CODE 				= #{bankRspCode},
+				BANK_RSP_MESSAGE 			= #{bankRspMessage},
+				ACCOUNT_ALIAS				= #{accountAliase},
+				BANK_CODE_STD				= #{bankCodeStd},
+				BANK_CODE_SUB				= #{bankCodeSub},
+				BANK_NAME					= #{bankName},
+				SAVINGS_BANK_NAME			= #{savingsBankName},
+				ACCOUNT_NUM_MASKED			= #{accountNumMasked},
+				PRINT_CONTENT				= #{printContent},
+				ACCOUNT_HOLDER_NAME			= #{accountHolderName},
+				WD_LIMIT_REMAIN_AMT			= #{wdLimitRemainAmtInt},
+				TX_STATUS					= 'C'
+		WHERE	
+				TRAN_DTIME					= #{tranDtime}
+			AND	BANK_TRAN_ID				= #{bankTranId}
+	</update>
+
+	<insert id="insertTransformBank" parameterType="String">
+		INSERT INTO OPENBANKING_TRANSFORM_BANK (USER_ID, BANK_CODE, ACCOUNT_NUM, PROC_STATUS, INST_TIMESTAMP)
+		VALUES	(
+				SELECT #{userNo},   as Bank_CODE,  as ACCOUNT_NUM, now()
+				FROM
+				WHERE
+			)
+		ON CONFLICT (USER_ID, BANK_CODE, ACCOUNT_NUM)
+		DO UPDATE
+		SET		INST_TIMESTAMP				= now(),
+				PROC_STATUS					= 'W',
+				RSP_CODE 					= "",
+				RSP_MESSAGE					= ""
+	</insert>
+	
+	<update id="updateTransformBank" parameterType="com.kt.localpay.openbanking.dto.UpdateTxDto">
+		UPDATE	OPENBANKING_TRANSFORM_BANK
+		SET		PROC_STATUS					= #{procStatus},
+				RSP_CODE 					= #{rspCode},
+				RSP_MESSAGE					= #{rspMessage},
+				UPDATE_TIMESTAMP			= now()
+		WHERE	USER_ID						= #{userNo}
+			AND	BANK_CODE					= #{bankCode}
+			AND	ACCOUNT_NUM					= #{accountNum}
+	</update>
+</mapper>

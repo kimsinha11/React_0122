@@ -10,7 +10,10 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
     "react-bootstrap-toasts": "^0.2.0",
+<<<<<<< HEAD
     "react-calendar": "^4.8.0",
+=======
+>>>>>>> 060f62ffd3e2886dd329c6400cf3839210238425
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",

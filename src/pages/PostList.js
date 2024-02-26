@@ -4,8 +4,28 @@ import '../PostList.css';
 
 function PostList({ isLoggedIn }) {
   const navigate = useNavigate();
+<<<<<<< HEAD
 
   // 게시글 작성 날짜를 가져오는 함수
+=======
+  // 임시로 만든 데이터
+  const [posts, setPosts] = useState([
+    { id: 1, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 2, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 3, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 4, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 5, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 6, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 71, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 8, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 9, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 10, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 11, title: '글 제목 2', content: '글 내용 2', writer:'홍길동', date:'', likes: 0, dislikes: 0 },
+    { id: 12, title: '글 제목 3', content: '글 내용 3', writer:'홍길동', date:'', likes: 0, dislikes: 0 },    { id: 13, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date:'', likes: 0, dislikes: 0 }
+    // 필요한 만큼 데이터 추가
+  ]);
+  
+  const itemsPerPage = 10; // 한 페이지에 표시할 게시물 수
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
+
+>>>>>>> 060f62ffd3e2886dd329c6400cf3839210238425
   const getCurrentTime = () => {
     const now = new Date();
     const year = now.getFullYear();
@@ -17,6 +37,7 @@ function PostList({ isLoggedIn }) {
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
   };
 
+<<<<<<< HEAD
   // 임시로 만든 데이터
   const [posts, setPosts] = useState([
     { id: 1, title: '글 제목 1', content: '글 내용 1', writer:'홍길동', date: getCurrentTime(), likes: 0, dislikes: 0 },
@@ -28,6 +49,8 @@ function PostList({ isLoggedIn }) {
   const itemsPerPage = 10; // 한 페이지에 표시할 게시물 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 번호
 
+=======
+>>>>>>> 060f62ffd3e2886dd329c6400cf3839210238425
   // 수정 버튼 클릭 시 실행되는 함수
   const handleEdit = (postId) => {
     if (!isLoggedIn) {
@@ -82,8 +105,13 @@ function PostList({ isLoggedIn }) {
     const pageParam = searchParams.get('page');
     const parsedPage = parseInt(pageParam);
 
+<<<<<<< HEAD
     // 페이지 번호가 유효한지 확인하고, 현재 페이지로 설정
     if (!isNaN(parsedPage) && parsedPage >= 1 && parsedPage <= Math.ceil(posts.length / itemsPerPage)) {
+=======
+     // 페이지 번호가 유효한지 확인하고, 현재 페이지로 설정
+     if (!isNaN(parsedPage) && parsedPage >= 1 && parsedPage <= Math.ceil(posts.length / itemsPerPage)) {
+>>>>>>> 060f62ffd3e2886dd329c6400cf3839210238425
       setCurrentPage(parsedPage);
     } else {
       // 잘못된 페이지 번호면 첫 페이지로 이동
@@ -97,6 +125,10 @@ function PostList({ isLoggedIn }) {
     navigate(`?page=${pageNumber}`);
   };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 060f62ffd3e2886dd329c6400cf3839210238425
   // 현재 페이지에 해당하는 게시물 가져오기
   const indexOfLastPost = currentPage * itemsPerPage;
   const indexOfFirstPost = indexOfLastPost - itemsPerPage;
@@ -110,7 +142,11 @@ function PostList({ isLoggedIn }) {
 
   return (
     <div className="PostList">
+<<<<<<< HEAD
       <div><h1>공지사항</h1></div> 
+=======
+      <div><h1>게시글</h1></div> 
+>>>>>>> 060f62ffd3e2886dd329c6400cf3839210238425
       <table>
         <thead>
           <tr>
@@ -131,7 +167,11 @@ function PostList({ isLoggedIn }) {
               <td><Link to={`/detail/${post.id}`}>{post.title}</Link></td>
               <td><Link to={`/detail/${post.id}`}>{post.content}</Link></td>
               <td className="Center">{post.writer}</td>
+<<<<<<< HEAD
               <td className="Center">{post.date}</td> {/* 작성 날짜를 표시 */}
+=======
+              <td className="Center">{getCurrentTime()}</td>
+>>>>>>> 060f62ffd3e2886dd329c6400cf3839210238425
               <td className="Center">
                 <button onClick={() => handleEdit(post.id)}>수정</button>
                 <button onClick={() => handleDelete(post.id)}>삭제</button>
@@ -156,4 +196,8 @@ function PostList({ isLoggedIn }) {
   );
 }
 
+<<<<<<< HEAD
 export default PostList;
+=======
+export default PostList;
+>>>>>>> 060f62ffd3e2886dd329c6400cf3839210238425

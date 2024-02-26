@@ -1,0 +1,91 @@
+// MainServiceImpl.java
+package kr.co.wizian.react.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import kr.co.wizian.react.dto.LoginReplyDto;
+import kr.co.wizian.react.dto.LoginRequestDto;
+import kr.co.wizian.react.mapper.MainMapper;
+import kr.co.wizian.react.service.MainService;
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Transactional
+@Slf4j
+public class MainServiceImpl implements MainService {
+
+    @Autowired
+    private MainMapper mainMapper; // MainMapper는 실제로는 사용자의 데이터베이스와 상호작용하는 인터페이스입니다. 
+
+    final int ID_MIN_LENGTH = 4;
+    final int ID_MAX_LENGTH = 64;
+
+    final int PASSWORD_MIN_LENGTH = 6;
+    final int PASSWORD_MAX_LENGTH = 16;
+
+    final String ID_PASSWORD_ERROR = "입력하신 ID, 비밀번호가 잘못되었습니다";
+
+    public LoginReplyDto doLogin(LoginRequestDto requestDto) {
+        // parameter 검사
+        String userId = requestDto.getUserId();
+        String password = requestDto.getPassword();
+
+        log.info("ID: {}, Password: {}", userId, password);
+
+        if((userId == null) || (password == null)){
+            return errorLoginReply(ID_PASSWORD_ERROR);
+        }
+
+        userId = userId.trim();
+        password = password.trim();
+
+        if((userId.length() < ID_MIN_LENGTH)
+            ||(userId.length() > ID_MAX_LENGTH)
+            ||(password.length() < PASSWORD_MIN_LENGTH)
+            ||(password.length() > PASSWORD_MAX_LENGTH)) {
+
+            return errorLoginReply(ID_PASSWORD_ERROR);
+        }
+
+        // 응답 object 생성
+        LoginReplyDto replyDto;
+
+        // DB에서 비밀번호 요청
+        try {
+            String dbPassword = mainMapper.getUserPassword(userId);
+            if(dbPassword == null) {
+
+                log.info("ID 오류: {}", userId);
+                return errorLoginReply(ID_PASSWORD_ERROR);
+            } else if(dbPassword.compareTo(password) != 0) {
+                log.info("비밀번호 오류: {}", userId);
+                return errorLoginReply(ID_PASSWORD_ERROR);
+            }
+
+            // 성공 응답 return
+            replyDto = new LoginReplyDto();
+            replyDto.setReplyCode("O");
+            replyDto.setMessage("성공");
+
+        } catch(Exception ex) {
+
+            log.error(ex.getMessage());
+
+            replyDto = errorLoginReply("시스템 장애입니다");
+        }
+
+        return replyDto;
+    }
+
+
+    LoginReplyDto errorLoginReply(String message) {
+
+        LoginReplyDto dto = new LoginReplyDto();
+        dto.setReplyCode("F");
+        dto.setMessage(message);
+
+        return dto;
+    }
+}
