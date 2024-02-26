@@ -1,0 +1,31 @@
+.Detail {
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+  width: 70%;
+  margin: 1% auto 10%; /* 상단 여백 1%, 하단 여백 10%, 가운데 정렬을 위한 auto 마진 */
+  flex-direction: column;
+}
+
+.Main {
+  border: 2px solid #0a0505;
+  border-radius: 5px;
+  width: 70%;
+  height: 500px;
+  text-align: center;
+  padding: 2%;
+}
+
+.Detail p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.ButtonContainer {
+  padding-top: 1%;
+}
+.Comment {
+  border: 2px solid #0a0505;
+  border-radius: 5px;
+  width: 70%;
+  padding: 2%;
+  height: 250px;
+}
